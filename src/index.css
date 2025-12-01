@@ -1,0 +1,23 @@
+/* IMPORT GOOGLE FONT */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Space+Grotesk:wght@300..700&display=swap');
+
+/* TAILWIND */
+@import "tailwindcss";
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+
+/* AUTO FONT SYSTEM */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+  }
+
+  p, span, li, a, button, input, textarea, label, small, div {
+    font-family: 'Space grotesk', sans-serif;
+  }
+}
+html, body {
+  overflow-x: hidden;
+}
