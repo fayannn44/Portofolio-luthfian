@@ -45,7 +45,7 @@ export default function CTASection() {
 
           {/* SECONDARY CTA */}
           <button className="px-8 py-4 border-2 border-black bg-white text-black uppercase font-bold text-sm tracking-wide shadow-[6px_6px_0_#000] hover:bg-black hover:text-white transition-all">
-            View Portfolio
+            View Any Project
           </button>
         </motion.div>
       </div>

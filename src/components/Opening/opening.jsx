@@ -1,65 +1,67 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export default function Opening({ onFinish }) {
-  const [visible, setVisible] = useState(true);
-  const [slideUp, setSlideUp] = useState(false);
+  const [exit, setExit] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      // Step 1: Fade out text + mulai slide screen
-      setSlideUp(true);
+    const timer = setTimeout(() => setExit(true), 3000);
+    const finish = setTimeout(() => onFinish && onFinish(), 3800);
 
-      // Step 2: hilangkan setelah animasi selesai
-      setTimeout(() => {
-        setVisible(false);
-        onFinish();
-      }, 1200);
-    }, 2500);
-
-    return () => clearTimeout(timer);
-  }, [onFinish]);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(finish);
+    };
+  }, []);
 
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          className="fixed inset-0 bg-black flex items-center justify-center z-[9999]"
-          initial={{ y: 0, opacity: 1 }}
-          animate={slideUp ? { y: "-100%", opacity: 0.8 } : { y: 0 }}
-          exit={{ opacity: 0 }}
-          transition={{
-            duration: 1.2,
-            ease: [0.25, 0.1, 0.25, 1],
-          }}
-        >
-          {/* Text */}
-          <motion.div
-            initial={{ opacity: 1 }}
-            animate={slideUp ? { opacity: 0, y: -20, filter: "blur(8px)" } : {}}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col items-center"
+    <motion.div
+      initial={{ y: 0 }}
+      animate={{ y: exit ? "-100%" : 0 }}
+      transition={{ duration: 1.1, ease: "easeInOut" }}
+      className="fixed inset-0 bg-white flex flex-col items-center justify-center gap-3 z-[9999]"
+    >
+      <div className="flex flex-col gap-6 text-center select-none">
+        {/* MAIN WORDS */}
+        {["DESIGN", "MOVE", "CREATE"].map((word, i) => (
+          <motion.h1
+            key={word}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.2 + i * 0.35,
+              duration: 0.8,
+              ease: "easeOut",
+            }}
+            className="text-[55px] sm:text-[90px] font-bold text-black tracking-tight"
           >
-            <motion.h1
-              className="text-5xl md:text-7xl font-bold text-white tracking-widest"
-              initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 1.1, ease: "easeOut" }}
-            >
-              LUTHFIAN
-            </motion.h1>
+            {word}
+          </motion.h1>
+        ))}
+      </div>
 
-            <motion.p
-              className="text-gray-300 mt-4 text-lg md:text-2xl tracking-wide"
-              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 1.4, delay: 0.3, ease: "easeOut" }}
-            >
-              Front-End Developer
-            </motion.p>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+      {/* TAGLINE + NAME */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 0.9, y: 0 }}
+        transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
+        className="text-center mt-6"
+      >
+        <p className="text-[14px] sm:text-[16px] tracking-wide font-medium text-black/70 uppercase">
+          Creative Developer & Digital Designer
+        </p>
+        <p className="text-[16px] sm:text-[20px] font-bold text-black mt-1 tracking-tight">
+          LUTHFIAN AZZAM
+        </p>
+      </motion.div>
+
+      {/* Aesthetic Grain */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.18] mix-blend-multiply"
+        style={{
+          backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')",
+        }}
+      />
+    </motion.div>
   );
 }

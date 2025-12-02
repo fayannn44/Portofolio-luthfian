@@ -44,12 +44,31 @@ function App() {
       {isLoaded && (
         <>
           <Navbar />
-          <Herosec />
-          <About />
-          <SkillSection />
-          <Project />
-          <Cta />
-         <Footer />
+
+          {/* === HOME SECTION === */}
+          <section id="home">
+            <Herosec />
+          </section>
+
+          {/* === ABOUT SECTION === */}
+          <section id="about">
+            <About />
+          </section>
+
+          {/* === SKILL SECTION === */}
+          <section id="skill">
+            <SkillSection />
+          </section>
+
+          {/* === PROJECT SECTION === */}
+          <section id="project">
+            <Project />
+          </section>
+          <section id ="cta">
+            <Cta />
+          </section>
+          
+          <Footer />
         </>
       )}
     </>
