@@ -10,6 +10,7 @@ import SkillSection from "./components/Skill/skill.jsx";
 import Project from "./components/Project/project.jsx";
 import Cta from "./components/Cta/cta.jsx";
 import Footer from "./components/Footer/footer.jsx";
+import ScrollProgress from "./components/Effects/CursorTrail.jsx";
 
 // Lenis
 import Lenis from "@studio-freight/lenis";
@@ -43,6 +44,10 @@ function App() {
 
       {isLoaded && (
         <>
+          {/* === SCROLL PROGRESS BAR === */}
+          <ScrollProgress />
+
+          {/* === NAVBAR === */}
           <Navbar />
 
           {/* === HOME SECTION === */}
@@ -64,10 +69,13 @@ function App() {
           <section id="project">
             <Project />
           </section>
-          <section id ="cta">
+
+          {/* === CTA SECTION === */}
+          <section id="cta">
             <Cta />
           </section>
-          
+
+          {/* === FOOTER === */}
           <Footer />
         </>
       )}
